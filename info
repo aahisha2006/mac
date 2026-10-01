@@ -1,0 +1,31 @@
+echo "===== MAC INFO ====="
+system_profiler SPHardwareDataType
+
+echo
+echo "===== STORAGE ====="
+diskutil list
+system_profiler SPStorageDataType
+
+echo
+echo "===== BATTERY ====="
+system_profiler SPPowerDataType | grep -E "Cycle Count|Condition|Maximum Capacity|Full Charge Capacity"
+
+echo
+echo "===== SERIAL ====="
+system_profiler SPHardwareDataType | grep -E "Model Name|Model Identifier|Chip|Memory|Serial"
+
+echo
+echo "===== macOS ====="
+sw_vers
+
+echo
+echo "===== MDM / PROFILE ====="
+profiles status -type enrollment
+
+echo
+echo "===== SIP ====="
+csrutil status
+
+echo
+echo "===== DISK SMART ====="
+diskutil info disk0 | grep -E "SMART|Solid State|Device / Media Name"
